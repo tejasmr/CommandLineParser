@@ -10,6 +10,8 @@
 #define ArgumentVector argv
 
 class CommandLineParser {
+private:
+    void generateFlags();
 public:
     int count;
     char** vector;
@@ -18,6 +20,7 @@ public:
     CommandLineParser( int &_argc, char** &_argv );
     void print();
     std::string value( std::string flag );
+    void printFlags();
 };
 CommandLineParser::CommandLineParser( int &_argc, char** &_argv ) {
     count = _argc;
@@ -39,6 +42,20 @@ std::string CommandLineParser::value( std::string flag ) {
             return it->second;
     }
     return "";
+}
+
+void CommandLineParser::generateFlags() {
+    for( int i=2; i<count; i+=2 ) {
+        flags.push_back( std::make_pair( std::string(vector[i-1]), std::string(vector[i]) ) );
+    }
+}
+
+void CommandLineParser::printFlags() {
+    std::cout << "Flags Begin" << std::endl;
+    for( std::vector<std::pair<std::string, std::string> >::iterator it = flags.begin(); it != flags.end(); it++ ) {
+        std::cout << it->first << " : " << it->second << std::endl;
+    }
+    std::cout << "Flags End" << std::endl;
 }
 
 #endif
