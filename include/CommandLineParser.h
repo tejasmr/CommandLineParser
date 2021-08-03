@@ -25,6 +25,7 @@ public:
 CommandLineParser::CommandLineParser( int &_argc, char** &_argv ) {
     count = _argc;
     vector = _argv;
+    generateFlags();
 }
 
 void CommandLineParser::print() {
