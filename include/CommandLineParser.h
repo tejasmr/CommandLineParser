@@ -22,6 +22,7 @@ public:
     std::string value( std::string flag );
     void printFlags();
 };
+
 CommandLineParser::CommandLineParser( int &_argc, char** &_argv ) {
     count = _argc;
     vector = _argv;
